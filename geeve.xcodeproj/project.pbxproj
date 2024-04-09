@@ -21,6 +21,12 @@
 		686843C42BA2D9DD009C6ED5 /* donationPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686843C32BA2D9DD009C6ED5 /* donationPagesViewController.swift */; };
 		686843C72BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686843C52BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.swift */; };
 		686843C82BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686843C62BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.xib */; };
+		688235E42BC50905006AD3F0 /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688235E22BC50905006AD3F0 /* SenderTableViewCell.swift */; };
+		688235E52BC50905006AD3F0 /* SenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688235E32BC50905006AD3F0 /* SenderTableViewCell.xib */; };
+		688235E92BC50A1B006AD3F0 /* reciverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688235E72BC50A1B006AD3F0 /* reciverTableViewCell.swift */; };
+		688235EA2BC50A1B006AD3F0 /* reciverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688235E82BC50A1B006AD3F0 /* reciverTableViewCell.xib */; };
+		688235ED2BC50DCD006AD3F0 /* chatScrrenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688235EC2BC50DCD006AD3F0 /* chatScrrenViewController.swift */; };
+		688235F12BC53C1F006AD3F0 /* RealTimeDataBaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688235F02BC53C1F006AD3F0 /* RealTimeDataBaseHelper.swift */; };
 		6886086A2BB6B22900289FAE /* userdefullt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688608692BB6B22900289FAE /* userdefullt.swift */; };
 		689807F62BBA8BE0001B690D /* realm database helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689807F52BBA8BE0001B690D /* realm database helper.swift */; };
 		68A51DE22BB6982E0003357A /* launchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A51DE12BB6982E0003357A /* launchScreenViewController.swift */; };
@@ -80,6 +86,12 @@
 		686843C32BA2D9DD009C6ED5 /* donationPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = donationPagesViewController.swift; sourceTree = "<group>"; };
 		686843C52BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = donationPagesCellTableViewCell.swift; sourceTree = "<group>"; };
 		686843C62BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = donationPagesCellTableViewCell.xib; sourceTree = "<group>"; };
+		688235E22BC50905006AD3F0 /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
+		688235E32BC50905006AD3F0 /* SenderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTableViewCell.xib; sourceTree = "<group>"; };
+		688235E72BC50A1B006AD3F0 /* reciverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reciverTableViewCell.swift; sourceTree = "<group>"; };
+		688235E82BC50A1B006AD3F0 /* reciverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = reciverTableViewCell.xib; sourceTree = "<group>"; };
+		688235EC2BC50DCD006AD3F0 /* chatScrrenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatScrrenViewController.swift; sourceTree = "<group>"; };
+		688235F02BC53C1F006AD3F0 /* RealTimeDataBaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeDataBaseHelper.swift; sourceTree = "<group>"; };
 		688608692BB6B22900289FAE /* userdefullt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userdefullt.swift; sourceTree = "<group>"; };
 		689807F52BBA8BE0001B690D /* realm database helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "realm database helper.swift"; sourceTree = "<group>"; };
 		68A51DE12BB6982E0003357A /* launchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = launchScreenViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +156,8 @@
 			children = (
 				CE7FD90D2B91CD87009AE229 /* splach_CollectionViewCell.swift */,
 				686843C92BA2DA4B009C6ED5 /* donationPagesCell */,
+				688235E62BC50919006AD3F0 /* Sender Celll */,
+				688235EB2BC50A27006AD3F0 /* Recivier Cell */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -224,6 +238,32 @@
 				686843C32BA2D9DD009C6ED5 /* donationPagesViewController.swift */,
 			);
 			path = "donation list";
+			sourceTree = "<group>";
+		};
+		688235E62BC50919006AD3F0 /* Sender Celll */ = {
+			isa = PBXGroup;
+			children = (
+				688235E22BC50905006AD3F0 /* SenderTableViewCell.swift */,
+				688235E32BC50905006AD3F0 /* SenderTableViewCell.xib */,
+			);
+			path = "Sender Celll";
+			sourceTree = "<group>";
+		};
+		688235EB2BC50A27006AD3F0 /* Recivier Cell */ = {
+			isa = PBXGroup;
+			children = (
+				688235E72BC50A1B006AD3F0 /* reciverTableViewCell.swift */,
+				688235E82BC50A1B006AD3F0 /* reciverTableViewCell.xib */,
+			);
+			path = "Recivier Cell";
+			sourceTree = "<group>";
+		};
+		688235EE2BC50DDB006AD3F0 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				688235EC2BC50DCD006AD3F0 /* chatScrrenViewController.swift */,
+			);
+			path = chat;
 			sourceTree = "<group>";
 		};
 		CD0ACAA3F719DFC7A64DA1CC /* Frameworks */ = {
@@ -330,6 +370,7 @@
 				686B21962BB536890058EBF1 /* coustome side bar and alert */,
 				686B21982BB537060058EBF1 /* Terms and condition */,
 				686B21992BB537220058EBF1 /* donation list */,
+				688235EE2BC50DDB006AD3F0 /* chat */,
 				680FBABE2BA1A2BC0068824E /* cell */,
 			);
 			path = Controller;
@@ -350,6 +391,7 @@
 				CE7FD9112B91CDD5009AE229 /* helperFunction.swift */,
 				688608692BB6B22900289FAE /* userdefullt.swift */,
 				689807F52BBA8BE0001B690D /* realm database helper.swift */,
+				688235F02BC53C1F006AD3F0 /* RealTimeDataBaseHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -487,6 +529,8 @@
 				CE7FD8E02B91CBEC009AE229 /* LaunchScreen.storyboard in Resources */,
 				6823A1922BA8243B008D6196 /* inter.ttf in Resources */,
 				CE7FD8DD2B91CBEC009AE229 /* Assets.xcassets in Resources */,
+				688235E52BC50905006AD3F0 /* SenderTableViewCell.xib in Resources */,
+				688235EA2BC50A1B006AD3F0 /* reciverTableViewCell.xib in Resources */,
 				686843C82BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.xib in Resources */,
 				CE7FD8D82B91CBE9009AE229 /* Main.storyboard in Resources */,
 				6850F1712BAC3061003031EC /* GoogleService-Info.plist in Resources */,
@@ -620,6 +664,7 @@
 				CE7FD9082B91CD14009AE229 /* customepageviewcontroler.swift in Sources */,
 				680FBAC62BA1A9B70068824E /* resetPassViewController.swift in Sources */,
 				680FBAC42BA1A4A10068824E /* otpViewController.swift in Sources */,
+				688235ED2BC50DCD006AD3F0 /* chatScrrenViewController.swift in Sources */,
 				680FBAC02BA1A3890068824E /* singInViewController.swift in Sources */,
 				6886086A2BB6B22900289FAE /* userdefullt.swift in Sources */,
 				CE7FD90C2B91CD6C009AE229 /* mainViewController.swift in Sources */,
@@ -627,6 +672,7 @@
 				686843BE2BA2D929009C6ED5 /* registrationViewController.swift in Sources */,
 				68A61E972BAD46CC008FD2BB /* fireBaseHelper.swift in Sources */,
 				CE7FD9102B91CDBD009AE229 /* onBordingslide.swift in Sources */,
+				688235E92BC50A1B006AD3F0 /* reciverTableViewCell.swift in Sources */,
 				686843C72BA2DA3C009C6ED5 /* donationPagesCellTableViewCell.swift in Sources */,
 				686843C22BA2D9A5009C6ED5 /* customeSideBarViewController.swift in Sources */,
 				CE7FD90E2B91CD87009AE229 /* splach_CollectionViewCell.swift in Sources */,
@@ -638,8 +684,10 @@
 				686843C02BA2D97D009C6ED5 /* customePopUpViewController.swift in Sources */,
 				689807F62BBA8BE0001B690D /* realm database helper.swift in Sources */,
 				CE7FD8D32B91CBE9009AE229 /* SceneDelegate.swift in Sources */,
+				688235F12BC53C1F006AD3F0 /* RealTimeDataBaseHelper.swift in Sources */,
 				680FBAC22BA1A4610068824E /* forgetPasswordViewController.swift in Sources */,
 				68A51DE22BB6982E0003357A /* launchScreenViewController.swift in Sources */,
+				688235E42BC50905006AD3F0 /* SenderTableViewCell.swift in Sources */,
 				CE7FD9142B91CE02009AE229 /* Extionsion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

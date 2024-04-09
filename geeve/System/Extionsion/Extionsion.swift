@@ -82,6 +82,27 @@ extension UIView  {
         }
     }
     
+    // MARK: - 4 side cornerRadius
+     
+    @IBInspectable var TopLeft: CGFloat {
+           get { return layer.cornerRadius }
+           set { layer.cornerRadius = newValue }
+       }
+       
+       @IBInspectable var TopRight: CGFloat {
+           get { return layer.cornerRadius }
+           set { layer.maskedCorners = [.layerMaxXMinYCorner]; layer.cornerRadius = newValue }
+       }
+       
+       @IBInspectable var BottomLeft: CGFloat {
+           get { return layer.cornerRadius }
+           set { layer.maskedCorners = [.layerMinXMaxYCorner]; layer.cornerRadius = newValue }
+       }
+       
+       @IBInspectable var BottomRight: CGFloat {
+           get { return layer.cornerRadius }
+           set { layer.maskedCorners = [.layerMaxXMaxYCorner]; layer.cornerRadius = newValue }
+       }
    
 }
 

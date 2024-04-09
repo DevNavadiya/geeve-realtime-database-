@@ -92,6 +92,15 @@ class donationPagesViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "chatScrrenViewController") as! chatScrrenViewController
+        
+        let index = dataFromeFirebaseHelper[indexPath.row]
+        vc.nameofuser = index.UserName
+    
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
    
     
     func deleteData(at indexPath: IndexPath) {

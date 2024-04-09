@@ -13,6 +13,7 @@ pod 'SideMenu'
 pod 'FirebaseAnalytics'
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
+pod 'Firebase/Database'
 pod 'RealmSwift'
 pod 'NVActivityIndicatorView'
   target 'geeveTests' do

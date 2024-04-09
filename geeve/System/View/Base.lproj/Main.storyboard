@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DWM-cx-1ne">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w59-xz-UIP">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -2102,10 +2102,10 @@ password</string>
             </objects>
             <point key="canvasLocation" x="10008" y="-13"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat Scrren View Controller-->
         <scene sceneID="Yy6-ua-GJM">
             <objects>
-                <viewController id="DWM-cx-1ne" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatScrrenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DWM-cx-1ne" customClass="chatScrrenViewController" customModule="geeve" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2Z-QV-4z4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2132,6 +2132,9 @@ password</string>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="icons8-email-send-96"/>
+                                        <connections>
+                                            <action selector="send_btn:" destination="DWM-cx-1ne" eventType="touchUpInside" id="r1q-iV-z5G"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94113638194869476" green="0.94885915983811175" blue="0.97202749350636275" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2150,7 +2153,7 @@ password</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pJy-GS-AkP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pJy-GS-AkP">
                                 <rect key="frame" x="0.0" y="134" width="393" height="629"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -2158,9 +2161,9 @@ password</string>
                                 <rect key="frame" x="0.0" y="59" width="393" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9g-79-Gcb">
-                                        <rect key="frame" x="60" y="0.0" width="273" height="75"/>
+                                        <rect key="frame" x="164.66666666666666" y="0.0" width="63.666666666666657" height="75"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.94113638190000004" green="0.94885915980000002" blue="0.97202749349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lr1-1A-HVb">
@@ -2176,9 +2179,14 @@ password</string>
                                         <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
                                             <color key="baseForegroundColor" red="0.94113638190000004" green="0.94885915980000002" blue="0.97202749349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="back_btn:" destination="DWM-cx-1ne" eventType="touchUpInside" id="a3Z-yf-ToC"/>
+                                        </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q4b-1B-fPZ">
-                                        <rect key="frame" x="333" y="17.666666666666671" width="40" height="40"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Q4b-1B-fPZ">
+                                        <rect key="frame" x="333" y="18.666666666666671" width="40" height="38.666666666666671"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.94113638190000004" green="0.94885915980000002" blue="0.97202749349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="3sw-dH-RNr"/>
                                             <constraint firstAttribute="height" constant="40" id="wLv-BP-C0L"/>
@@ -2187,14 +2195,13 @@ password</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="d9g-79-Gcb" firstAttribute="leading" secondItem="lr1-1A-HVb" secondAttribute="trailing" id="7rd-5Y-jB3"/>
+                                    <constraint firstItem="d9g-79-Gcb" firstAttribute="centerX" secondItem="FGn-V9-O9Y" secondAttribute="centerX" id="EaK-Ge-d3T"/>
                                     <constraint firstItem="lr1-1A-HVb" firstAttribute="leading" secondItem="FGn-V9-O9Y" secondAttribute="leading" constant="20" id="LP8-HO-yd7"/>
                                     <constraint firstItem="Q4b-1B-fPZ" firstAttribute="centerY" secondItem="FGn-V9-O9Y" secondAttribute="centerY" id="QQ5-Ww-AeL"/>
                                     <constraint firstItem="d9g-79-Gcb" firstAttribute="top" secondItem="FGn-V9-O9Y" secondAttribute="top" id="U52-We-pqr"/>
                                     <constraint firstAttribute="bottom" secondItem="d9g-79-Gcb" secondAttribute="bottom" id="Wz4-cg-QkS"/>
                                     <constraint firstAttribute="trailing" secondItem="Q4b-1B-fPZ" secondAttribute="trailing" constant="20" id="uWC-A5-r1c"/>
                                     <constraint firstItem="lr1-1A-HVb" firstAttribute="centerY" secondItem="FGn-V9-O9Y" secondAttribute="centerY" id="w6K-ob-htm"/>
-                                    <constraint firstItem="Q4b-1B-fPZ" firstAttribute="leading" secondItem="d9g-79-Gcb" secondAttribute="trailing" id="zlC-si-ClY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2218,6 +2225,14 @@ password</string>
                             <constraint firstItem="NhG-i1-XEC" firstAttribute="trailing" secondItem="8id-y7-lzu" secondAttribute="trailing" id="yxs-W6-dDs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backBtn" destination="lr1-1A-HVb" id="gqv-G9-mF1"/>
+                        <outlet property="chatSenderButton" destination="IgC-pe-hVy" id="ywF-uq-HvX"/>
+                        <outlet property="chatTextFIled" destination="fuB-fv-qia" id="urp-zf-ImC"/>
+                        <outlet property="profileImage" destination="Q4b-1B-fPZ" id="hjr-0J-pSh"/>
+                        <outlet property="tabelview" destination="pJy-GS-AkP" id="G1F-wf-L7W"/>
+                        <outlet property="userName" destination="d9g-79-Gcb" id="trx-Ef-ywH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7BA-jT-Vn7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2282,6 +2297,7 @@ password</string>
         <image name="a6" width="229" height="48"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="icons8-email-send-96" width="96" height="96"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
