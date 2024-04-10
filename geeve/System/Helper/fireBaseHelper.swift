@@ -26,7 +26,7 @@ func login (Email : String , Password : String) {
     }
     
     
-    func saveUserData (name : String , lastname : String , Email : String , phonenumber : String , Password : String , id : String) {
+        func saveUserData (name : String , lastname : String , Email : String , phonenumber : String , Password : String , id : String) {
         
         let database = Firestore.firestore()
         let collection = database.collection("Userinfo")

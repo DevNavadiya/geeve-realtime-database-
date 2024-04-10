@@ -16,7 +16,7 @@ class registrationViewController: UIViewController {
     @IBOutlet weak var donee: UIButton!
     @IBOutlet weak var sidebar: UIButton!
 //    var data = [UserSingIn]()
-    
+    var notindata = String()
    
   
     
@@ -42,7 +42,7 @@ class registrationViewController: UIViewController {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customePopUpViewController") as! customePopUpViewController
             
           
-            
+            defultdata.sher.setnotindata(notindata: notindata)
             vc.modalPresentationStyle = .overCurrentContext
             vc.modalTransitionStyle = .crossDissolve
             vc.clouser = {

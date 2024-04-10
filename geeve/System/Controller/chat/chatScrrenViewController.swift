@@ -18,7 +18,7 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var chatSenderButton: UIButton!
     var nameofuser : String?
     let database = Database.database().reference()
-    var dataofchat : [chat] = []
+    
  
     
   
@@ -31,16 +31,13 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataofchat.count
+ return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tabelview.dequeueReusableCell(withIdentifier: "SenderTableViewCell") as! SenderTableViewCell
-        let chats = dataofchat[indexPath.row]
-        
-        
-        cell.gviedata(with: chats)
-        return cell
+      
+    return cell
         }
     
     @IBAction func send_btn(_ sender: Any) {

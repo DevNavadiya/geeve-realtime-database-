@@ -23,7 +23,5 @@ class SenderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func gviedata (with chat : chat) {
-        self.massage.text = chat.text
-    }
+   
 }

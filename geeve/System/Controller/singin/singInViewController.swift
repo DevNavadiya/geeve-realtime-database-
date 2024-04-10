@@ -144,37 +144,37 @@ class singInViewController: UIViewController {
     }
 }
 
-extension singInViewController {
+//extension singInViewController {
     
-    func checkEmailExistence(_ email: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("Userinfo").whereField("Email", isEqualTo: email).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error checking email existence: \(error.localizedDescription)")
-                completion(false)
-            } else {
-                if let snapshot = snapshot, !snapshot.documents.isEmpty {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            }
-        }
-    }
-    
-    func checkPassword(_ email: String, _ password: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("Userinfo").whereField("Email", isEqualTo: email).whereField("Password", isEqualTo: password).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error checking password: \(error.localizedDescription)")
-                completion(false)
-            } else {
-                if let snapshot = snapshot, !snapshot.documents.isEmpty {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            }
-        }
-    }
-}
+//    func checkEmailExistence(_ email: String, completion: @escaping (Bool) -> Void) {
+//        let db = Firestore.firestore()
+//        db.collection("Userinfo").whereField("Email", isEqualTo: email).getDocuments { (snapshot, error) in
+//            if let error = error {
+//                print("Error checking email existence: \(error.localizedDescription)")
+//                completion(false)
+//            } else {
+//                if let snapshot = snapshot, !snapshot.documents.isEmpty {
+//                    completion(true)
+//                } else {
+//                    completion(false)
+//                }
+//            }
+//        }
+//    }
+//    
+//    func checkPassword(_ email: String, _ password: String, completion: @escaping (Bool) -> Void) {
+//        let db = Firestore.firestore()
+//        db.collection("Userinfo").whereField("Email", isEqualTo: email).whereField("Password", isEqualTo: password).getDocuments { (snapshot, error) in
+//            if let error = error {
+//                print("Error checking password: \(error.localizedDescription)")
+//                completion(false)
+//            } else {
+//                if let snapshot = snapshot, !snapshot.documents.isEmpty {
+//                    completion(true)
+//                } else {
+//                    completion(false)
+//                }
+//            }
+//        }
+//    }
+//}
