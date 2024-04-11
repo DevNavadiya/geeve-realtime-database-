@@ -65,7 +65,7 @@ class donationPagesViewController: UIViewController, UITableViewDelegate, UITabl
         
         cell.name.text = index.name
         cell.age.text = index.Email
-        self.tabelview.reloadData()
+//        self.tabelview.reloadData()
 
 
 
