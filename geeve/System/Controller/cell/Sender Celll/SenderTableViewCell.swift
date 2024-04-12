@@ -9,9 +9,12 @@ import UIKit
 
 class SenderTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var massage: UILabel!
+    @IBOutlet weak var sendermassage: UILabel!
     
- 
+    func configure(with message: Chat) {
+           sendermassage.text = message.message
+           // Configure other UI elements with message data as needed
+       }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -30,6 +30,20 @@ struct usermodel {
 
 
 
+struct Chat {
+    var senderID: String
+    var receiverID: String
+    var message: String
+    var timestamp: Date
+    
+    init(senderID: String, receiverID: String, message: String, timestamp: Date) {
+        self.senderID = senderID
+        self.receiverID = receiverID
+        self.message = message
+        self.timestamp = timestamp
+    }
+}
+
 class realltimeuserdata {
     
     static let sher = realltimeuserdata()
@@ -44,7 +58,9 @@ class realltimeuserdata {
         self.ref.child("User").childByAutoId().setValue(dictionary)
     }
     
-    
+    func saveuserchat () {
+        
+    }
 }
 
 

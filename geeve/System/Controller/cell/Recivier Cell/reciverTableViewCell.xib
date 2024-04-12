@@ -61,6 +61,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="cSL-hl-YLR"/>
+            <connections>
+                <outlet property="recivermassage" destination="5yX-cK-FvI" id="eCy-8d-XKx"/>
+            </connections>
             <point key="canvasLocation" x="105.34351145038167" y="80.281690140845072"/>
         </tableViewCell>
     </objects>
