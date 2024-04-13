@@ -19,7 +19,7 @@ class singInViewController: UIViewController {
     @IBOutlet weak var remember_me: UIButton!
     
     @IBOutlet weak var eye: UIButton!
-    
+    var id = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,38 +54,54 @@ class singInViewController: UIViewController {
     }
     
     @IBAction func signInButtonTapped(_ sender: Any) {
-        guard let email = self.email.text, !email.isEmpty,
-              let password = self.pass.text, !password.isEmpty else {
-            if email.text!.isEmpty{ showAlert(title: "email", message: "Please enter email.") }else{
-                showAlert(title: "Password", message: "Please enter Password.")
-            }
-            return
-        }
-        let db = Firestore.firestore()
-        let userInfoRef = db.collection("Userinfo").document(email)
+        //        guard let email = self.email.text, !email.isEmpty,
+        //              let password = self.pass.text, !password.isEmpty else {
+        //            if email.text!.isEmpty{ showAlert(title: "email", message: "Please enter email.") }else{
+        //                showAlert(title: "Password", message: "Please enter Password.")
+        //            }
+        //            return
+        //        }
+        //        let db = Firestore.firestore()
+        //        let userInfoRef = db.collection("Userinfo").document(email)
+        //
+        //        userInfoRef.getDocument { [weak self] (document, error) in
+        //            guard let strongSelf = self else { return }
+        //
+        //            if let error = error {
+        //                print("Error fetching user document: \(error.localizedDescription)")
+        //                strongSelf.showAlert(title: "Error", message: "Failed to authenticate. Please try again.")
+        //                return
+        //            }
+        //
+        //            guard let document = document, document.exists else {
+        //                strongSelf.showAlert(title: "User Not Exist", message: "User not found.")
+        //                return
+        //            }
+        //            let userData = document.data()
+        //            if let storedPassword = userData?["Password"] as? String, storedPassword == password {
+        //
+        //                strongSelf.navigateToNextScreen()
+        //            } else {
+        //                strongSelf.showAlert(title: "Password Not Exist", message: "Incorrect password.")
+        //            }
+        //        }
         
-        userInfoRef.getDocument { [weak self] (document, error) in
-            guard let strongSelf = self else { return }
-            
-            if let error = error {
-                print("Error fetching user document: \(error.localizedDescription)")
-                strongSelf.showAlert(title: "Error", message: "Failed to authenticate. Please try again.")
-                return
-            }
-            
-            guard let document = document, document.exists else {
-                strongSelf.showAlert(title: "User Not Exist", message: "User not found.")
-                return
-            }
-            let userData = document.data()
-            if let storedPassword = userData?["Password"] as? String, storedPassword == password {
+        Auth.auth().signIn(withEmail: self.email.text ?? "nil" , password: self.pass.text ?? "nil"){otheruser,error in
+            if let error = error as? NSError {
+                print(error.localizedDescription)
+            }else{
+                print("user rejister")
+                let userInfo = Auth.auth().currentUser
+                self.id = userInfo!.uid
+                print(self.id)
+                self.navigateToNextScreen()
                 
-                strongSelf.navigateToNextScreen()
-            } else {
-                strongSelf.showAlert(title: "Password Not Exist", message: "Incorrect password.")
             }
         }
     }
+        
+        
+    
     
     
     

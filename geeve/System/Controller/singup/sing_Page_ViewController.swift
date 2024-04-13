@@ -160,7 +160,7 @@ class sing_Page_ViewController: UIViewController , UITextFieldDelegate {
                     print("user rejister")
                     let userInfo = Auth.auth().currentUser
                     self.id = userInfo!.uid
-                    
+                    print(self.id)
                 }
                 
             }

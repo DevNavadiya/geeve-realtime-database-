@@ -8,6 +8,13 @@
 import UIKit
 class reciverTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var recivermassage: UILabel!
+    
+    func configure(with message: Chat) {
+        recivermassage.text = message.message
+           // Configure other UI elements with message data as needed
+       }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import CryptoKit
 class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -19,6 +20,7 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     var nameofuser : String?
     let database = Database.database().reference()
     var reciver : String?
+    var senderid : String?
     var massage : [Chat] = []
     var reciveMassege : [Chat] = []
     
@@ -39,34 +41,34 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message: Chat
-          if indexPath.section == 0 {
-              // Sent messages section
-              message = massage[indexPath.row]
-          } else {
-              // Received messages section
-              message = reciveMassege[indexPath.row]
-          }
-
-        if message.senderID == Auth.auth().currentUser?.uid {
-            let cell = tabelview.dequeueReusableCell(withIdentifier: "SenderTableViewCell") as! SenderTableViewCell
-            cell.configure(with: message)
-            return cell
-
-        }else{
-            let cell = tabelview.dequeueReusableCell(withIdentifier: "reciverTableViewCell") as! reciverTableViewCell
-            cell.configure(with: message)
-            return cell
-
-        }
         
+//         if indexPath.section == 0 {
+//             // Sent messages section
+//             message = massage[indexPath.row]
+//         } else {
+//             // Received messages section
+//             message = reciveMassege[indexPath.row]
+//         }
+
+        let message = massage[indexPath.row]
+//        print(" sender Masseg  \(self.massage)")
+//        print(" reciver Masseg  \(self.reciveMassege)")
         
+         if message.senderID == senderid {
+             let cell = tableView.dequeueReusableCell(withIdentifier: "reciverTableViewCell") as! reciverTableViewCell
+             cell.configure(with: message)
+             return cell
+         } else {
+             let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell") as! SenderTableViewCell
+             cell.configure(with: message)
+             return cell
+         }
     }
     
   
  
     @IBAction func send_btn(_ sender: Any) {
-        guard let senderID = Auth.auth().currentUser?.uid,
+        guard let senderID = senderid,
               let receiverID = reciver,
                      let message = chatTextFIled.text else {
             print("usernot found")
@@ -82,8 +84,9 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.navigationController?.popViewController(animated: true)
     }
+
     func fetchMessages() {
-        guard let senderID = Auth.auth().currentUser?.uid,
+        guard let senderID = senderid,
               let receiverID = reciver else {
             return
         }
@@ -102,21 +105,25 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
 
             // Convert TimeInterval to Date
             let timestamp = Date(timeIntervalSince1970: timestampInterval)
-            
+
             // Assuming Chat has an initializer like init(senderID:receiverID:message:timestamp:)
             let message = Chat(senderID: senderID, receiverID: receiverID, message: messageText, timestamp: timestamp)
-            
-            if  senderID  == senderID {
+
+            if senderID == self.senderid {
                 
                 self.massage.append(message)
-                print(message)
-            }else {
+            } else {
+                
                 self.reciveMassege.append(message)
-                }
+            }
+
+           
+            DispatchQueue.main.async {
                 self.tabelview.reloadData()
-            
+            }
         }
     }
+
 
     
     func sendMesssage  (senderID : String , receiverID : String , message : String) {
@@ -136,10 +143,15 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
-    func genratChatRoomId (senderID : String , receiverID : String) -> String {
+    func genratChatRoomId(senderID: String, receiverID: String) -> String {
         let sanitizedSenderID = senderID.replacingOccurrences(of: "[.#$\\[\\]]", with: "_", options: .regularExpression)
-           let sanitizedReceiverID = receiverID.replacingOccurrences(of: "[.#$\\[\\]]", with: "_", options: .regularExpression)
-           return sanitizedSenderID < sanitizedReceiverID ? "\(sanitizedSenderID)_\(sanitizedReceiverID)" : "\(sanitizedReceiverID)_\(sanitizedSenderID)"
+        let sanitizedReceiverID = receiverID.replacingOccurrences(of: "[.#$\\[\\]]", with: "_", options: .regularExpression)
+        
+        // Ensure that the chat room ID is consistently generated based on alphabetical order
+        let sortedIDs = [sanitizedSenderID, sanitizedReceiverID].sorted()
+        let chatRoomID = sortedIDs.joined(separator: "_")
+        print(chatRoomID)
+        return chatRoomID
     }
 //    func fetchMessages() {
 //            // Replace "chatRoomID" with the actual chat room ID
@@ -157,3 +169,5 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
 //            }
 //        }
 }
+
+
