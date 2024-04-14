@@ -19,10 +19,9 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var chatSenderButton: UIButton!
     var nameofuser : String?
     let database = Database.database().reference()
-    var reciver : String?
-    var senderid : String?
+    var reciver : String!
+   var senderid : String!
     var massage : [Chat] = []
-    var reciveMassege : [Chat] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +30,12 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tabelview.dataSource = self
         fetchMessages()
         let senderNib = UINib(nibName: "SenderTableViewCell", bundle: nil)
-            tabelview.register(senderNib, forCellReuseIdentifier: "SenderTableViewCell")
+        tabelview.register(senderNib, forCellReuseIdentifier: "SenderTableViewCell")
         let receiverNib = UINib(nibName: "reciverTableViewCell", bundle: nil)
-           tabelview.register(receiverNib, forCellReuseIdentifier: "reciverTableViewCell")
+        tabelview.register(receiverNib, forCellReuseIdentifier: "reciverTableViewCell")
+     
+           
+          
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,42 +43,40 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//         if indexPath.section == 0 {
-//             // Sent messages section
-//             message = massage[indexPath.row]
-//         } else {
-//             // Received messages section
-//             message = reciveMassege[indexPath.row]
-//         }
+
 
         let message = massage[indexPath.row]
-//        print(" sender Masseg  \(self.massage)")
-//        print(" reciver Masseg  \(self.reciveMassege)")
-        
          if message.senderID == senderid {
-             let cell = tableView.dequeueReusableCell(withIdentifier: "reciverTableViewCell") as! reciverTableViewCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell") as! SenderTableViewCell
+            
              cell.configure(with: message)
              return cell
          } else {
-             let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell") as! SenderTableViewCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "reciverTableViewCell") as! reciverTableViewCell
              cell.configure(with: message)
              return cell
          }
     }
     
   
- 
+    override func viewWillAppear(_ animated: Bool) {
+//        self.tabelview.reloadData()
+//        let lastRowIndex = IndexPath(row: self.massage.count - 1, section: 0)
+//        self.tabelview.scrollToRow(at: lastRowIndex, at: .bottom, animated: false)
+    }
     @IBAction func send_btn(_ sender: Any) {
         guard let senderID = senderid,
               let receiverID = reciver,
+             
                      let message = chatTextFIled.text else {
             print("usernot found")
                    return
            
         }
-                
+        self.tabelview.reloadData()
+//        self.massage.removeAll()
         sendMesssage(senderID: senderID, receiverID: receiverID, message: message)
+
         self.chatTextFIled.text = ""
     }
     
@@ -86,6 +86,7 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func fetchMessages() {
+        self.massage.removeAll()
         guard let senderID = senderid,
               let receiverID = reciver else {
             return
@@ -109,22 +110,29 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
             // Assuming Chat has an initializer like init(senderID:receiverID:message:timestamp:)
             let message = Chat(senderID: senderID, receiverID: receiverID, message: messageText, timestamp: timestamp)
 
-            if senderID == self.senderid {
                 
                 self.massage.append(message)
-            } else {
-                
-                self.reciveMassege.append(message)
-            }
-
-           
+  
             DispatchQueue.main.async {
                 self.tabelview.reloadData()
             }
         }
     }
 
+    func scrollToBottom(of tableView: UITableView) {
+        let lastSection = tableView.numberOfSections - 1
+        guard lastSection >= 0 else {
+            return // No sections in the table view
+        }
 
+        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+        guard lastRow >= 0 else {
+            return // No rows in the last section
+        }
+
+        let indexPath = IndexPath(row: lastRow, section: lastSection)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
     
     func sendMesssage  (senderID : String , receiverID : String , message : String) {
         let chatroomId = genratChatRoomId(senderID: senderID, receiverID: receiverID)
@@ -153,6 +161,7 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
         print(chatRoomID)
         return chatRoomID
     }
+
 //    func fetchMessages() {
 //            // Replace "chatRoomID" with the actual chat room ID
 //            let chatRoomID = "your_chat_room_id"

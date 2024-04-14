@@ -2071,12 +2071,6 @@ password</string>
                                 <rect key="frame" x="0.0" y="154" width="393" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image 6" translatesAutoresizingMaskIntoConstraints="NO" id="KBW-Nc-Wns">
-                                <rect key="frame" x="0.0" y="652" width="393" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="lj4-8j-xKk"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5kx-P5-ner"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2084,10 +2078,7 @@ password</string>
                             <constraint firstItem="5kx-P5-ner" firstAttribute="trailing" secondItem="usI-5J-Kaf" secondAttribute="trailing" id="0TO-hT-cTp"/>
                             <constraint firstItem="dqR-0E-gSW" firstAttribute="leading" secondItem="5kx-P5-ner" secondAttribute="leading" id="EHw-NM-1aD"/>
                             <constraint firstItem="usI-5J-Kaf" firstAttribute="top" secondItem="yzS-uI-O8L" secondAttribute="top" id="GhO-Lz-pc6"/>
-                            <constraint firstItem="KBW-Nc-Wns" firstAttribute="leading" secondItem="5kx-P5-ner" secondAttribute="leading" id="Lw4-hw-2l8"/>
-                            <constraint firstItem="5kx-P5-ner" firstAttribute="trailing" secondItem="KBW-Nc-Wns" secondAttribute="trailing" id="PAY-iC-5pM"/>
                             <constraint firstItem="dqR-0E-gSW" firstAttribute="top" secondItem="usI-5J-Kaf" secondAttribute="bottom" constant="20" id="RmC-Sh-tAC"/>
-                            <constraint firstAttribute="bottom" secondItem="KBW-Nc-Wns" secondAttribute="bottom" id="eRa-7d-Y2w"/>
                             <constraint firstItem="usI-5J-Kaf" firstAttribute="centerX" secondItem="yzS-uI-O8L" secondAttribute="centerX" id="gcb-LU-3Jn"/>
                             <constraint firstItem="5kx-P5-ner" firstAttribute="trailing" secondItem="dqR-0E-gSW" secondAttribute="trailing" id="i4L-UF-UMG"/>
                             <constraint firstItem="5kx-P5-ner" firstAttribute="bottom" secondItem="dqR-0E-gSW" secondAttribute="bottom" id="u8c-ip-Y2j"/>
