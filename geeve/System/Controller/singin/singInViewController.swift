@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
-
+import FirebaseDatabase
 
 class singInViewController: UIViewController {
     
@@ -54,54 +54,72 @@ class singInViewController: UIViewController {
     }
     
     @IBAction func signInButtonTapped(_ sender: Any) {
-        //        guard let email = self.email.text, !email.isEmpty,
-        //              let password = self.pass.text, !password.isEmpty else {
-        //            if email.text!.isEmpty{ showAlert(title: "email", message: "Please enter email.") }else{
-        //                showAlert(title: "Password", message: "Please enter Password.")
-        //            }
-        //            return
-        //        }
-        //        let db = Firestore.firestore()
-        //        let userInfoRef = db.collection("Userinfo").document(email)
-        //
-        //        userInfoRef.getDocument { [weak self] (document, error) in
-        //            guard let strongSelf = self else { return }
-        //
-        //            if let error = error {
-        //                print("Error fetching user document: \(error.localizedDescription)")
-        //                strongSelf.showAlert(title: "Error", message: "Failed to authenticate. Please try again.")
-        //                return
-        //            }
-        //
-        //            guard let document = document, document.exists else {
-        //                strongSelf.showAlert(title: "User Not Exist", message: "User not found.")
-        //                return
-        //            }
-        //            let userData = document.data()
-        //            if let storedPassword = userData?["Password"] as? String, storedPassword == password {
-        //
-        //                strongSelf.navigateToNextScreen()
-        //            } else {
-        //                strongSelf.showAlert(title: "Password Not Exist", message: "Incorrect password.")
-        //            }
-        //        }
-        
-        Auth.auth().signIn(withEmail: self.email.text ?? "nil" , password: self.pass.text ?? "nil"){otheruser,error in
-            if let error = error as? NSError {
-                print(error.localizedDescription)
-            }else{
-                print("user rejister")
-                let userInfo = Auth.auth().currentUser
-                self.id = userInfo!.uid
-                print(self.id)
-                self.navigateToNextScreen()
-                
+        guard let email = email.text, !email.isEmpty,
+              let password = pass.text, !password.isEmpty else {
+            
+            return
+        }
+        checkCredentialsAndSignIn(email: email, password: password)
+      
+    }
+    
+
+  
+    func checkCredentialsAndSignIn(email: String, password: String) {
+        checkCredentialsExists(email: email, password: password) { emailExists, passwordExists in
+            if emailExists && (passwordExists) {
+                // Email-password combination exists in the database, sign in the user
+                Auth.auth().signIn(withEmail: email, password: password) { user, error in
+                    if let error = error {
+                        print("Sign in error:", error.localizedDescription)
+                        // Handle sign in error
+                    } else {
+                        // User signed in successfully
+                        print("User signed in successfully")
+                        if let userInfo = Auth.auth().currentUser {
+                            let userID = userInfo.uid
+                            print("User ID:", userID)
+                            // Navigate to the next screen
+                            self.navigateToNextScreen()
+                        }
+                    }
+                }
+            } else {
+                // Show separate alerts for email and password
+                if !emailExists {
+                    self.showAlert(title: "Invalid Email", message: "The provided email address is incorrect.")
+                }
+                if !passwordExists {
+                    self.showAlert(title: "Invalid Password", message: "The provided password is incorrect.")
+                }
             }
         }
     }
-        
-        
+
     
+        
+    func checkCredentialsExists(email: String, password: String, completion: @escaping (Bool, Bool) -> Void) {
+        let ref = Database.database().reference().child("User")
+        ref.observeSingleEvent(of: .value) { snapshot in
+            var emailExists = false
+            var passwordExists = false
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                if let userData = snap.value as? [String: Any],
+                   let userEmail = userData["Email"] as? String,
+                   let userPassword = userData["Password"] as? String {
+                    if userEmail == email {
+                        emailExists = true
+                    }
+                    if userPassword == password {
+                        passwordExists = true
+                    }
+                }
+            }
+            completion(emailExists, passwordExists)
+        }
+    }
+
     
     
     
@@ -160,37 +178,4 @@ class singInViewController: UIViewController {
     }
 }
 
-//extension singInViewController {
-    
-//    func checkEmailExistence(_ email: String, completion: @escaping (Bool) -> Void) {
-//        let db = Firestore.firestore()
-//        db.collection("Userinfo").whereField("Email", isEqualTo: email).getDocuments { (snapshot, error) in
-//            if let error = error {
-//                print("Error checking email existence: \(error.localizedDescription)")
-//                completion(false)
-//            } else {
-//                if let snapshot = snapshot, !snapshot.documents.isEmpty {
-//                    completion(true)
-//                } else {
-//                    completion(false)
-//                }
-//            }
-//        }
-//    }
-//    
-//    func checkPassword(_ email: String, _ password: String, completion: @escaping (Bool) -> Void) {
-//        let db = Firestore.firestore()
-//        db.collection("Userinfo").whereField("Email", isEqualTo: email).whereField("Password", isEqualTo: password).getDocuments { (snapshot, error) in
-//            if let error = error {
-//                print("Error checking password: \(error.localizedDescription)")
-//                completion(false)
-//            } else {
-//                if let snapshot = snapshot, !snapshot.documents.isEmpty {
-//                    completion(true)
-//                } else {
-//                    completion(false)
-//                }
-//            }
-//        }
-//    }
-//}
+

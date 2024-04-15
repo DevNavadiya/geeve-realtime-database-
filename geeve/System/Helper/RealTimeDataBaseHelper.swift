@@ -11,6 +11,7 @@ import FirebaseDatabase
 
 
 struct usermodel {
+    var userID: String?
     var name : String
     var lastname : String
     var Email : String
@@ -18,7 +19,8 @@ struct usermodel {
     var Password : String
     var conformPassword : String
     
-    init(name: String, lastname: String, Email: String, phonenumber: String, Password: String, conformPassword: String) {
+    init(userID: String?, name: String, lastname: String, Email: String, phonenumber: String, Password: String, conformPassword: String) {
+        self.userID = userID
         self.name = name
         self.lastname = lastname
         self.Email = Email
@@ -57,10 +59,7 @@ class realltimeuserdata {
         let dictionary = ["name" : name , "lastname" : lastname , "Email" : Email , "phonenumber" : phonenumber , "Password" : Password , "conformPassword" : conformPassword]
         self.ref.child("User").childByAutoId().setValue(dictionary)
     }
-    
-    func saveuserchat () {
-        
-    }
+  
 }
 
 

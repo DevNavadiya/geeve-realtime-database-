@@ -59,25 +59,30 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
   
-    override func viewWillAppear(_ animated: Bool) {
-//        self.tabelview.reloadData()
-//        let lastRowIndex = IndexPath(row: self.massage.count - 1, section: 0)
-//        self.tabelview.scrollToRow(at: lastRowIndex, at: .bottom, animated: false)
-    }
+  
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            moveToLastComment()
+        }
+    
     @IBAction func send_btn(_ sender: Any) {
         guard let senderID = senderid,
               let receiverID = reciver,
              
                      let message = chatTextFIled.text else {
             print("usernot found")
-                   return
            
+            return
+            
         }
         self.tabelview.reloadData()
 //        self.massage.removeAll()
         sendMesssage(senderID: senderID, receiverID: receiverID, message: message)
 
         self.chatTextFIled.text = ""
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+            self.moveToLastComment()
+        }
     }
     
     @IBAction func back_btn(_ sender: Any) {
@@ -119,19 +124,20 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    func scrollToBottom(of tableView: UITableView) {
-        let lastSection = tableView.numberOfSections - 1
-        guard lastSection >= 0 else {
-            return // No sections in the table view
+    func moveToLastComment() {
+        if self.tabelview.contentSize.height > self.tabelview.frame.height {
+            // First figure out how many sections there are
+            let lastSectionIndex = self.tabelview!.numberOfSections - 1
+            
+            // Then grab the number of rows in the last section
+            let lastRowIndex = self.tabelview!.numberOfRows(inSection: lastSectionIndex) - 1
+            
+            // Now just construct the index path
+            let pathToLastRow = NSIndexPath(row: lastRowIndex, section: lastSectionIndex)
+            
+            // Make the last row visible
+            self.tabelview?.scrollToRow(at: pathToLastRow as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
         }
-
-        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-        guard lastRow >= 0 else {
-            return // No rows in the last section
-        }
-
-        let indexPath = IndexPath(row: lastRow, section: lastSection)
-        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
     func sendMesssage  (senderID : String , receiverID : String , message : String) {
@@ -161,22 +167,7 @@ class chatScrrenViewController: UIViewController, UITableViewDelegate, UITableVi
         print(chatRoomID)
         return chatRoomID
     }
-
-//    func fetchMessages() {
-//            // Replace "chatRoomID" with the actual chat room ID
-//            let chatRoomID = "your_chat_room_id"
-//            let messagesRef = Database.database().reference().child("Chat").child(chatRoomID)
-//            
-//        messagesRef.observe(.childAdded) { snapshot in
-//                if let messageData = snapshot.value as? [String: Any] {
-//                    // Assuming you have a Message model
-//                    if let message = Chat(snapshot: messageData) {
-//                        self.messages.append(message)
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//            }
-//        }
+ 
 }
 
 

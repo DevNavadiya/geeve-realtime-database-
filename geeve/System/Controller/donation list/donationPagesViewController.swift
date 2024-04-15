@@ -8,6 +8,7 @@
 import UIKit
 import SideMenu
 import FirebaseDatabase
+import FirebaseAuth
 
 
 class donationPagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -16,6 +17,8 @@ class donationPagesViewController: UIViewController, UITableViewDelegate, UITabl
     var ref = DatabaseReference.init()
     @IBOutlet weak var tabelview: UITableView!
     var arrOfData = [usermodel]()
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
        getRealTimeUserData()
@@ -59,8 +62,9 @@ class donationPagesViewController: UIViewController, UITableViewDelegate, UITabl
              let btn = UIAlertAction(title: "Delete", style: .destructive) {_ in
                  
                  guard let indexpath = self.tabelview.indexPath(for: cell) else { return }
-                 let userid = index.Email
-//                 self.deleteUser(userID: userid)
+                 let userid = index.userID
+                 
+                 self.deleteUser(userID: userid ?? "")
                  self.tabelview.reloadData()
              }
              alert.addAction(btn)
@@ -84,6 +88,7 @@ class donationPagesViewController: UIViewController, UITableViewDelegate, UITabl
             vc.email = index.Email
             vc.pass = index.Password
             vc.phone = index.phonenumber
+            vc.id = index.userID!
             
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -102,6 +107,8 @@ class donationPagesViewController: UIViewController, UITableViewDelegate, UITabl
         vc.senderid = defultdata.sher.getemail()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
    
 @IBAction func sidebar(_ sender: Any) {
         
@@ -119,46 +126,44 @@ extension donationPagesViewController {
         let x = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customeSideBarViewController") as! customeSideBarViewController
         x.singouut = {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "mainViewController") as! mainViewController
-                  
+            
             self.dismiss(animated: true)
             UserDefaults.standard.setValue(false, forKey: "USERIN")
             
             
             self.navigationController?.pushViewController(vc, animated: true)
-        
+            
         }
         
         
         let menu = SideMenuNavigationController(rootViewController: x)
         let leftMenuNavigationController = SideMenuNavigationController(rootViewController: x)
-      
+        
         leftMenuNavigationController.presentationStyle = .menuSlideIn
         leftMenuNavigationController.menuWidth = min(view.frame.width * 0.8, 320)
-       
-       
+        
+        
         SideMenuManager.default.leftMenuNavigationController = leftMenuNavigationController
-      
+        
         SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view , forMenu: .left)
         
-       
+        
         
         
         present(leftMenuNavigationController, animated: true, completion: nil)
         
     }
-      func getRealTimeUserData() {
-       
-       
-
-        self.ref = Database.database().reference()
+    func getRealTimeUserData() {
+     self.ref = Database.database().reference()
         self.ref.child("User").observe(.value) { snapshot in
-           
+            
             self.arrOfData.removeAll()
             
             for child in snapshot.children {
                 let snap = child as! DataSnapshot
                 let value = snap.value as? NSDictionary
+                let userID = snap.key
                 let name = value?["name"] as? String
                 let lastname = value?["lastname"] as? String
                 let email = value?["Email"] as? String
@@ -168,37 +173,38 @@ extension donationPagesViewController {
                 
                 
                 
-                self.arrOfData.append(usermodel(name: name!, lastname: lastname!, Email: email!, phonenumber: phonenumber!, Password: password!, conformPassword: confirmPassword!))
+                self.arrOfData.append(usermodel(userID: userID, name: name!, lastname: lastname!, Email: email!, phonenumber: phonenumber!, Password: password!, conformPassword: confirmPassword!))
                 
                 for (index, userData) in self.arrOfData.enumerated() {
                     if userData.Email == defultdata.sher.getemail() {
                         self.arrOfData.remove(at: index)
                     }
                 }
-                       
+                
             }
             
-        DispatchQueue.main.async {
-                      self.tabelview.reloadData()
-                  }
+            DispatchQueue.main.async {
+                self.tabelview.reloadData()
+            }
             print("prinnt arr  \(self.arrOfData)")
         }
     }
-
     
-//    func deleteUser(userID: String) {
-//        if userID == "" {
-//            print("user email is nill")
-//        }else{
-//            let ref = Database.database().reference().child("User/\(userID)")
-//            ref.removeValue { error , demo in
-//                if let error = error {
-//                    print("Error deleting user: \(error.localizedDescription)")
-//                } else {
-//                    // User deleted successfully
-//                    // You can optionally update the table view here to reflect the deletion
-//                }
-//            }
-//        }
-//    }
+    
+    func deleteUser(userID: String) {
+        if userID == "" {
+            print("user email is nill")
+        }else{
+            let ref = Database.database().reference().child("User/\(userID)")
+            ref.removeValue { error , demo in
+                if let error = error {
+                    print("Error deleting user: \(error.localizedDescription)")
+                } else {
+                    // User deleted successfully
+                    // You can optionally update the table view here to reflect the deletion
+                }
+            }
+        }
+    }
+    
 }
